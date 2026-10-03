@@ -7,6 +7,18 @@ import type {
   StudySessionInput,
   StudyStats
 } from '../../preload/api'
+import computerAsset from '../../../resources/1.png'
+import lampAsset from '../../../resources/2.png'
+import bowAsset from '../../../resources/3.png'
+import heartAsset from '../../../resources/4.png'
+import bookAsset from '../../../resources/5.png'
+import openBookAsset from '../../../resources/6.png'
+import vinesAsset from '../../../resources/8.png'
+import questionAsset from '../../../resources/9.png'
+import sparkleAsset from '../../../resources/11.png'
+import cursorAsset from '../../../resources/12.png'
+import flowerAsset from '../../../resources/13.png'
+import lightbulbAsset from '../../../resources/14.png'
 
 const today = new Date().toISOString().slice(0, 10)
 const emptyForm: StudySessionInput = {
@@ -31,6 +43,8 @@ function App(): React.JSX.Element {
   const [flippedFlashcards, setFlippedFlashcards] = useState<Record<string, boolean>>({})
   const [selectedFlashcard, setSelectedFlashcard] = useState<Flashcard | null>(null)
   const [selectedFlashcardBack, setSelectedFlashcardBack] = useState(false)
+  const [typedFlashcardText, setTypedFlashcardText] = useState('')
+  const [isFormOpen, setIsFormOpen] = useState(false)
   const [editingId, setEditingId] = useState<number | undefined>()
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -67,6 +81,25 @@ function App(): React.JSX.Element {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [selectedFlashcard])
 
+  useEffect(() => {
+    if (!selectedFlashcard) return
+    const targetText = selectedFlashcardBack ? selectedFlashcard.back : selectedFlashcard.front
+    let characterIndex = 0
+    const typingTimer = window.setInterval(() => {
+      characterIndex += 1
+      setTypedFlashcardText(targetText.slice(0, characterIndex))
+      if (characterIndex >= targetText.length) window.clearInterval(typingTimer)
+    }, 42)
+    return () => window.clearInterval(typingTimer)
+  }, [selectedFlashcard, selectedFlashcardBack])
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--pixel-cursor', `url(${cursorAsset}) 0 0, auto`)
+    return () => {
+      document.documentElement.style.removeProperty('--pixel-cursor')
+    }
+  }, [])
+
   const updateConcept = (index: number, field: keyof ConceptInput, value: string): void => {
     setForm((current) => ({
       ...current,
@@ -87,6 +120,7 @@ function App(): React.JSX.Element {
     setForm({ ...emptyForm, concepts: [{ name: '', notes: '' }], flashcards: [] })
     setEditingId(undefined)
     setError('')
+    setIsFormOpen(false)
   }
 
   const submit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -106,6 +140,7 @@ function App(): React.JSX.Element {
 
   const edit = (session: StudySession): void => {
     setEditingId(session.id)
+    setIsFormOpen(true)
     setForm({
       subjectName: session.subjectName,
       sessionDate: session.sessionDate,
@@ -133,22 +168,40 @@ function App(): React.JSX.Element {
   return (
     <main className="app-shell">
       <header className="page-header">
-        <div>
-          <p className="eyebrow">STUDY LOG</p>
-          <h1>{editingId ? 'Edit study session' : 'New study session'}</h1>
-          <p className="muted">Record sessions, concepts, notes, and review cards in one place.</p>
+        <div className="header-identity">
+          <img className="header-computer" src={computerAsset} alt="" />
+          <div>
+            <p className="eyebrow">STUDY LOG // PLAYER 01</p>
+            <h1>Your study garden</h1>
+            <p className="muted">Level up your knowledge, one session at a time.</p>
+          </div>
         </div>
-        {editingId && (
-          <button className="button secondary" onClick={resetForm}>
-            Cancel edit
+        <div className="header-actions">
+          <button
+            className="button primary new-session-button"
+            onClick={() => {
+              resetForm()
+              setIsFormOpen(true)
+            }}
+          >
+            <img className="button-icon" src={bookAsset} alt="" />
+            <span>+ New session</span>
           </button>
-        )}
+        </div>
       </header>
-      <section className="content-grid">
-        <form className="card form-card" onSubmit={submit}>
+      <section className={`content-grid ${isFormOpen ? 'form-open' : 'form-closed'}`}>
+        <form
+          className={`card form-card ${isFormOpen ? '' : 'form-card-hidden'}`}
+          onSubmit={submit}
+        >
           <div className="section-heading">
-            <h2>Session details</h2>
-            <span className="required">* required</span>
+            <div>
+              <p className="eyebrow">{editingId ? 'EDIT MODE' : 'NEW ENTRY'}</p>
+              <h2>{editingId ? 'Edit study session' : 'Session details'}</h2>
+            </div>
+            <button type="button" className="text-button" onClick={resetForm}>
+              Close
+            </button>
           </div>
           <label>
             Subject *
@@ -293,31 +346,47 @@ function App(): React.JSX.Element {
           </div>
           {error && <p className="error">{error}</p>}
           <button className="button primary" type="submit" disabled={saving}>
+            <img className="button-icon" src={openBookAsset} alt="" />
             {saving ? 'Saving...' : editingId ? 'Update session' : 'Save session'}
           </button>
         </form>
         <aside className="summary-column">
           <div className="summary-grid">
             <div className="card metric">
-              <span>Sessions</span>
+              <div className="metric-heading">
+                <img src={bowAsset} alt="" />
+                <span>Sessions</span>
+              </div>
               <strong>{stats?.totalSessions ?? 0}</strong>
             </div>
             <div className="card metric">
-              <span>Tempo total</span>
+              <div className="metric-heading">
+                <img src={heartAsset} alt="" />
+                <span>Total time</span>
+              </div>
               <strong>{formatDuration(stats?.totalMinutes ?? 0)}</strong>
             </div>
             <div className="card metric">
-              <span>Concepts</span>
+              <div className="metric-heading">
+                <img src={sparkleAsset} alt="" />
+                <span>Concepts</span>
+              </div>
               <strong>{stats?.totalConcepts ?? 0}</strong>
             </div>
             <div className="card metric">
-              <span>Flashcards</span>
+              <div className="metric-heading">
+                <img src={flowerAsset} alt="" />
+                <span>Flashcards</span>
+              </div>
               <strong>{stats?.totalFlashcards ?? 0}</strong>
             </div>
           </div>
           <div className="card breakdown">
             <div className="section-heading">
-              <h2>Totals by subject</h2>
+              <h2 className="title-with-icon">
+                <img src={lightbulbAsset} alt="" />
+                Totals by subject
+              </h2>
             </div>
             {stats?.subjectBreakdown.length ? (
               stats.subjectBreakdown.map((item) => (
@@ -353,6 +422,7 @@ function App(): React.JSX.Element {
           <div className="history-list">
             {sessions.map((session) => (
               <article className="card session-card" key={session.id}>
+                <img className="session-vines" src={vinesAsset} alt="" aria-hidden="true" />
                 <div className="session-main">
                   <div className="session-meta">
                     <span className="date">
@@ -401,8 +471,13 @@ function App(): React.JSX.Element {
                             }}
                           >
                             <div className="flashcard-viewer-meta">
-                              <span>{flashcard.type === 'concept' ? 'Concept' : 'Question'}</span>
-                              <span>{showingBack ? 'Back' : 'Front'}</span>
+                              <span className="flashcard-type-label">
+                                <img
+                                  src={flashcard.type === 'concept' ? openBookAsset : questionAsset}
+                                  alt=""
+                                />
+                                {flashcard.type === 'concept' ? 'Concept' : 'Question'}
+                              </span>
                             </div>
                             <div className="flashcard-face">
                               {showingBack ? flashcard.back : flashcard.front}
@@ -448,7 +523,17 @@ function App(): React.JSX.Element {
             onClick={(event) => event.stopPropagation()}
           >
             <div className="flashcard-modal-header">
-              <span className="eyebrow">
+              <span className="eyebrow flashcard-modal-type">
+                <img
+                  src={
+                    selectedFlashcardBack
+                      ? lampAsset
+                      : selectedFlashcard.type === 'question'
+                        ? questionAsset
+                        : openBookAsset
+                  }
+                  alt=""
+                />
                 {selectedFlashcard.type === 'concept' ? 'CONCEPT' : 'QUESTION'}
               </span>
               <button
@@ -459,9 +544,11 @@ function App(): React.JSX.Element {
                 ×
               </button>
             </div>
-            <span className="flashcard-side-label">{selectedFlashcardBack ? 'Back' : 'Front'}</span>
             <div className="flashcard-modal-face">
-              {selectedFlashcardBack ? selectedFlashcard.back : selectedFlashcard.front}
+              {typedFlashcardText}
+              {typedFlashcardText.length <
+                (selectedFlashcardBack ? selectedFlashcard.back : selectedFlashcard.front)
+                  .length && <span className="typing-caret">▌</span>}
             </div>
             <button
               className="button primary"
