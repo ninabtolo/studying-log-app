@@ -28,12 +28,12 @@ This is the **v1.0 portfolio release**. The main experience is complete and read
 
 You do **not** need VS Code, Node.js, or any programming tools to use the app.
 
-Open the [`releases/`](releases/) folder and download the file that matches your computer:
+Open the [latest GitHub Release](https://github.com/ninabtolo/studying-log-app/releases/latest) and download the file that matches your computer from the **Assets** section:
 
 | Your computer | Download this file | What to do |
 | --- | --- | --- |
 | **macOS** | The file ending in `.dmg` | Open it and drag **Study Garden** to Applications. |
-| **Windows** | The file ending in `.exe` | Open it and follow the installation steps. |
+| **Windows** | The file ending in `-setup.exe` | Open it and follow the installation steps. |
 
 <div align="center">
 
@@ -42,6 +42,8 @@ Open the [`releases/`](releases/) folder and download the file that matches your
 </div>
 
 > **macOS note:** Since this is an independently distributed portfolio app and is not notarized yet, macOS may show a security warning. If that happens, right-click the app, choose **Open**, and confirm.
+
+> **Windows note:** Windows may say it **protected your PC** because this is a new app with only a few downloads and it is not code-signed yet. If the download is blocked, click **More info** first, then choose **Keep anyway**. When opening the installer, click **More info → Run anyway** in Windows SmartScreen. These warnings are caused by the app's low downloada, not by a missing application file.
 
 Study data is stored locally on your computer. No account, server, or internet connection is required.
 
