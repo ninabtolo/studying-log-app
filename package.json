@@ -1,10 +1,9 @@
 {
   "name": "study-log",
   "version": "1.0.0",
-  "description": "An Electron application with React and TypeScript",
+  "description": "A cozy desktop study log for sessions, concepts, and flashcards",
+  "author": "Study Log",
   "main": "./out/main/index.js",
-  "author": "example.com",
-  "homepage": "https://electron-vite.org",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint --cache .",

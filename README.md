@@ -1,38 +1,63 @@
 <div align="center">
 
-<img src="resources/icon.png" alt="Study Log icon" width="96" />
+<img src="resources/icon.png" alt="Study Garden icon" width="112" />
 
-# 🌸 Study Log 🌸
+# 🌸 Study Garden 🌸
 
-### *A tiny study garden for growing knowledge, one session at a time.*
+### *A cozy little place to grow your knowledge.*
 
 <p>
-  <img src="https://img.shields.io/badge/status-in%20progress-ff8fab?style=flat-square" alt="Status: in progress" />
-  <img src="https://img.shields.io/badge/Electron-39.8.10-ffb3c6?style=flat-square&logo=electron&logoColor=white" alt="Electron 39.8.10" />
-  <img src="https://img.shields.io/badge/React-19.2.1-ffc8dd?style=flat-square&logo=react&logoColor=white" alt="React 19.2.1" />
-  <img src="https://img.shields.io/badge/TypeScript-5.9.3-ff8fab?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript 5.9.3" />
+  <img src="https://img.shields.io/badge/version-1.0-ff8fab?style=flat-square" alt="Version 1.0" />
+  <img src="https://img.shields.io/badge/status-finished-ff69a4?style=flat-square" alt="Finished" />
+  <img src="https://img.shields.io/badge/desktop%20app-Electron-ffb3c6?style=flat-square&logo=electron&logoColor=white" alt="Electron desktop app" />
 </p>
 
-<p>🌷 Log your progress · 🌱 collect concepts · ✨ review what you learned</p>
+<p>🌷 Log your sessions · 🌱 collect concepts · ✨ review what you learned</p>
 
 </div>
 
 <br />
 
-Desktop application for logging study sessions, organizing concepts, and reviewing flashcards. The project is built with Electron, React, and TypeScript, with local SQLite persistence.
+## 💗 About the app
 
-## 🌷 Features
+Study Garden is a finished desktop study companion for keeping track of learning sessions, concepts, notes, and flashcards in one calm, friendly space.
 
-- Create study sessions with a subject, date, duration, and general notes.
-- Add studied concepts and notes to each session.
-- Create two types of flashcards: concept or question.
-- Review flashcards directly from the study history by switching between the front and answer.
-- View overall statistics for sessions, total study time, concepts, and flashcards.
-- See session and study-time totals grouped by subject.
-- Edit or delete existing sessions.
-- Store data locally without requiring a server or account.
+This is the **v1.0 portfolio release**. The main experience is complete and ready to download. Future changes will be limited to small polish improvements, maintenance, or bug fixes.
 
-### Feature tour
+## 🎀 Download and try it
+
+You do **not** need VS Code, Node.js, or any programming tools to use the app.
+
+Open the [`releases/`](releases/) folder and download the file that matches your computer:
+
+| Your computer | Download this file | What to do |
+| --- | --- | --- |
+| **macOS** | The file ending in `.dmg` | Open it and drag **Study Garden** to Applications. |
+| **Windows** | The file ending in `.exe` | Open it and follow the installation steps. |
+
+<div align="center">
+
+🌸 <strong>Download → open → start growing your study garden.</strong> 🌸
+
+</div>
+
+> **macOS note:** Since this is an independently distributed portfolio app and is not notarized yet, macOS may show a security warning. If that happens, right-click the app, choose **Open**, and confirm.
+
+Study data is stored locally on your computer. No account, server, or internet connection is required.
+
+## ✨ Features
+
+- Create study sessions with a subject, date, duration, and notes.
+- Add concepts and personal notes to each session.
+- Create concept or question flashcards while studying.
+- Review flashcards by switching between the front and answer.
+- Open flashcards in a focused review modal with a gentle typing animation.
+- See total sessions, study time, concepts, and flashcards at a glance.
+- Track sessions and total study time by subject.
+- Edit or delete sessions whenever your notes change.
+- Keep everything private and local with SQLite persistence.
+
+### 🌷 See it in action
 
 <div align="center">
 
@@ -53,7 +78,7 @@ Desktop application for logging study sessions, organizing concepts, and reviewi
       <img src="resources/Screen-Recording-2026-10-03-at-9.41.01 PM (1).gif" alt="Reviewing flashcards" width="100%" />
     </td>
     <td align="center" width="50%">
-      <strong>🌷 Track your progress</strong><br /><br />
+      <strong>🌸 Track your progress</strong><br /><br />
       <img src="resources/Screen-Recording-2026-10-03-at-9.42.20 PM.gif" alt="Tracking study progress" width="100%" />
     </td>
   </tr>
@@ -61,23 +86,29 @@ Desktop application for logging study sessions, organizing concepts, and reviewi
 
 </div>
 
-## 🧺 Tech stack
+## 🌼 Why Study Garden?
 
-- [Electron](https://www.electronjs.org/)
-- [React](https://react.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Vite](https://vite.dev/) through `electron-vite`
-- [SQLite](https://www.sqlite.org/) through `better-sqlite3`
-- [electron-builder](https://www.electron.build/) for creating installers
+The goal was to make study tracking feel less like filling out a spreadsheet and more like caring for a small personal garden: simple, visual, private, and rewarding to return to.
 
-## 💌 Requirements
+## 🧺 Built with
 
-- Node.js and npm.
-- An environment compatible with the platform where the application will run.
+<div align="center">
+
+`Electron` · `React` · `TypeScript` · `Vite` · `SQLite`
+
+</div>
+
+<details>
+<summary>🌱 Run the project from source</summary>
+
+### Requirements
+
+- Node.js and npm
+- A compatible development environment
 
 A recent Node.js LTS version is recommended.
 
-## 🌱 Installation
+### Installation
 
 Clone the repository and install the dependencies:
 
@@ -85,104 +116,67 @@ Clone the repository and install the dependencies:
 npm install
 ```
 
-The `postinstall` script automatically installs the native dependencies required by Electron.
+### Development
 
-## 🛠️ Development
-
-Start the application in development mode with Vite and hot reload:
+Start the application with Vite and hot reload:
 
 ```bash
 npm run dev
 ```
 
-To open an already-built version:
+Open an already-built version:
 
 ```bash
 npm run start
 ```
 
-## ✨ Validation and code quality
-
-Check TypeScript types:
+### Validation
 
 ```bash
 npm run typecheck
-```
-
-Run ESLint:
-
-```bash
 npm run lint
-```
-
-Format the project files:
-
-```bash
 npm run format
 ```
 
-## 📦 Build and distribution
-
-Build the compiled application files:
+### Build installers
 
 ```bash
+# Build compiled files
 npm run build
-```
 
-Create an unpacked build for testing:
-
-```bash
+# Create an unpacked app for local testing
 npm run build:unpack
-```
 
-Create an installer for a specific platform:
-
-```bash
-# Windows
-npm run build:win
-
-# macOS
+# Create a platform installer
 npm run build:mac
-
-# Linux
+npm run build:win
 npm run build:linux
 ```
 
-Generated artifacts are placed in the `dist/` directory.
+Generated build artifacts are placed in `dist/`.
 
-## 🗃️ Local data
-
-The database is created automatically in Electron's user data directory, in a file named `study-log.sqlite`. The required tables are created automatically on first launch.
-
-Sessions, concepts, and flashcards are stored locally and remain available between application launches. Deleting a session also removes its associated concepts and flashcards.
-
-## 🌼 Project structure
+### Project structure
 
 ```text
 src/
 ├── main/       # Electron main process and SQLite access
 ├── preload/    # Secure API exposed to the renderer
 └── renderer/   # React user interface
-resources/      # Icons and visual assets
+resources/      # Icons, illustrations, and demo GIFs
 ```
 
-Data access happens through IPC between the renderer and main process. The interface does not access SQLite directly.
+</details>
 
-## 🎀 Available scripts
+## 💌 Local data
 
-| Script | Description |
-| --- | --- |
-| `npm run dev` | Start the development environment |
-| `npm run start` | Open the compiled application in preview mode |
-| `npm run build` | Run type checking and compile the project |
-| `npm run build:unpack` | Generate an unpacked build |
-| `npm run build:win` | Build the Windows package |
-| `npm run build:mac` | Build the macOS package |
-| `npm run build:linux` | Build the Linux package |
-| `npm run typecheck` | Validate TypeScript types |
-| `npm run lint` | Run ESLint |
-| `npm run format` | Format files with Prettier |
+The app creates a local `study-log.sqlite` database automatically inside Electron's user data directory. Sessions, concepts, and flashcards remain available between launches and are never sent to a server.
 
-## 💗 License
+## 💖 License
 
-This project does not have a license defined yet.
+This is a personal portfolio project. No formal license has been defined yet.
+
+<div align="center">
+
+🌷 Thank you for visiting Study Garden 🌷
+
+</div>
