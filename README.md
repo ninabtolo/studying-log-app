@@ -32,6 +32,35 @@ Desktop application for logging study sessions, organizing concepts, and reviewi
 - Edit or delete existing sessions.
 - Store data locally without requiring a server or account.
 
+### Feature tour
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <strong>🌱 Create a study session</strong><br /><br />
+      <img src="resources/Screen-Recording-2026-10-03-at-9.38.19 PM (1).gif" alt="Creating a study session" width="100%" />
+    </td>
+    <td align="center" width="50%">
+      <strong>📚 Explore your study history</strong><br /><br />
+      <img src="resources/Screen-Recording-2026-10-03-at-9.39.27 PM (1).gif" alt="Exploring study history" width="100%" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <strong>✨ Review flashcards</strong><br /><br />
+      <img src="resources/Screen-Recording-2026-10-03-at-9.41.01 PM (1).gif" alt="Reviewing flashcards" width="100%" />
+    </td>
+    <td align="center" width="50%">
+      <strong>🌷 Track your progress</strong><br /><br />
+      <img src="resources/Screen-Recording-2026-10-03-at-9.42.20 PM.gif" alt="Tracking study progress" width="100%" />
+    </td>
+  </tr>
+</table>
+
+</div>
+
 ## 🧺 Tech stack
 
 - [Electron](https://www.electronjs.org/)
